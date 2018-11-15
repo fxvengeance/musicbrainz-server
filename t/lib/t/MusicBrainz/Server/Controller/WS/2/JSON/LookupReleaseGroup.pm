@@ -169,6 +169,7 @@ test 'release group lookup with inc=artists+releases+tags+ratings' => sub {
                     packaging => JSON::null,
                     "packaging-id" => JSON::null,
                     disambiguation => "",
+                    tags => [],
                 }],
             disambiguation => "",
             rating => { "votes-count" => 0, value => JSON::null },

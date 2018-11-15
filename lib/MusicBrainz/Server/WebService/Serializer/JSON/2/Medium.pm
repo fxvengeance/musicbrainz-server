@@ -68,8 +68,14 @@ sub serialize_track {
     $track_output{recording} = serialize_entity($entity->recording, $inc, $stash)
         if $inc->recordings;
 
-    $track_output{"artist-credit"} = serialize_entity($entity->artist_credit, $inc, $stash)
+    if ($stash->{release_artist} == $entity->artist_credit) {
+        local $MusicBrainz::Server::WebService::Serializer::JSON::2::Utils::hide_tags_and_genres = 1;
+        $track_output{"artist-credit"} = serialize_entity($entity->artist_credit, $inc, $stash)
         if $inc->artist_credits;
+    } else {
+        $track_output{"artist-credit"} = serialize_entity($entity->artist_credit, $inc, $stash)
+        if $inc->artist_credits;
+    }
 
     return \%track_output;
 }

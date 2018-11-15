@@ -29,6 +29,8 @@ sub serialize
     my ($self, $entity, $inc, $stash, $toplevel) = @_;
     my %body;
 
+    $stash->{release_artist} = $entity->artist_credit;
+
     $body{title} = $entity->name;
 
     if (my ($earliest_event) = $entity->all_events) {

@@ -916,11 +916,11 @@ test 'release lookup, relation attributes' => sub {
         };
 };
 
-test 'release lookup, track artists have no tags' => sub {
+test 'release lookup, related artists have no tags/genres' => sub {
 
     MusicBrainz::Server::Test->prepare_test_database(shift->c, '+webservice');
 
-    ws2_test_json 'release lookup, track artists have no tags/genres',
+    ws2_test_json 'release lookup, related artists have no tags/genres',
     '/release/4f5a6b97-a09b-4893-80d1-eae1f3bfa221?inc=artists+recordings+tags+genres+artist-rels+recording-level-rels'
     => {
         'artist-credit' => [ {
@@ -928,7 +928,19 @@ test 'release lookup, track artists have no tags' => sub {
                 disambiguation => '',
                 id => '3088b672-fba9-4b4b-8ae0-dce13babfbb4',
                 name => 'Plone',
-                'sort-name' => 'Plone'
+                'sort-name' => 'Plone',
+                tags => [
+                    { count => 1, name => "british" },
+                    { count => 1, name => "electronic" },
+                    { count => 1, name => "electronica" },
+                    { count => 1, name => "english" },
+                    { count => 1, name => "glitch" },
+                    { count => 1, name => "uk" },
+                    { count => 1, name => "warp" }],
+                genres => [
+                    { count => 1, name => "electronic" },
+                    { count => 1, name => "electronica" },
+                    { count => 1, name => "glitch" }],
             },
             joinphrase => '',
             name => 'Plone'
@@ -985,6 +997,8 @@ test 'release lookup, track artists have no tags' => sub {
                                 'target-type' => 'artist',
                             }
                         ],
+                        tags => [],
+                        genres => [],
                         title => 'On My Bus'
                     },
                     title => 'On My Bus'
@@ -1018,6 +1032,8 @@ test 'release lookup, track artists have no tags' => sub {
                                 'target-credit' => '',
                                 'target-type' => 'artist',
                         } ],
+                        tags => [],
+                        genres => [],
                         title => 'Top & Low Rent'
                     },
                     title => 'Top & Low Rent'
@@ -1051,6 +1067,8 @@ test 'release lookup, track artists have no tags' => sub {
                             'target-credit' => '',
                             'target-type' => 'artist',
                         } ],
+                        tags => [],
+                        genres => [],
                         title => 'Plock'
                     },
                     title => 'Plock'
@@ -1084,6 +1102,8 @@ test 'release lookup, track artists have no tags' => sub {
                             'target-credit' => '',
                             'target-type' => 'artist',
                         } ],
+                        tags => [],
+                        genres => [],
                         title => 'Marbles'
                     },
                     title => 'Marbles'
@@ -1117,6 +1137,8 @@ test 'release lookup, track artists have no tags' => sub {
                             'target-credit' => '',
                             'target-type' => 'artist',
                         } ],
+                        tags => [],
+                        genres => [],
                         title => 'Busy Working'
                     },
                     title => 'Busy Working'
@@ -1150,6 +1172,8 @@ test 'release lookup, track artists have no tags' => sub {
                             'target-credit' => '',
                             'target-type' => 'artist',
                         } ],
+                        tags => [],
+                        genres => [],
                         title => 'The Greek Alphabet'
                     },
                     title => 'The Greek Alphabet'
@@ -1183,6 +1207,8 @@ test 'release lookup, track artists have no tags' => sub {
                             'target-credit' => '',
                             'target-type' => 'artist',
                         } ],
+                        tags => [],
+                        genres => [],
                         title => 'Press a Key'
                     },
                     title => 'Press a Key'
@@ -1216,6 +1242,8 @@ test 'release lookup, track artists have no tags' => sub {
                             'target-credit' => '',
                             'target-type' => 'artist',
                         } ],
+                        tags => [],
+                        genres => [],
                         title => 'Bibi Plone'
                     },
                     title => 'Bibi Plone'
@@ -1249,6 +1277,8 @@ test 'release lookup, track artists have no tags' => sub {
                             'target-credit' => '',
                             'target-type' => 'artist',
                         } ],
+                        tags => [],
+                        genres => [],
                         title => 'Be Rude to Your School'
                     },
                     title => 'Be Rude to Your School'
@@ -1282,6 +1312,8 @@ test 'release lookup, track artists have no tags' => sub {
                             'target-credit' => '',
                             'target-type' => 'artist',
                         } ],
+                        tags => [],
+                        genres => [],
                         title => 'Summer Plays Out'
                     },
                     title => 'Summer Plays Out'

@@ -20,6 +20,7 @@ our @EXPORT_OK = qw(
     serializer
 );
 
+our $hide_tags_and_genres = 0;
 our $force_ratings = 0;
 
 my %serializers =
@@ -244,6 +245,8 @@ sub serialize_rating {
 sub serialize_relationships {
     my ($into, $entity, $inc, $stash) = @_;
 
+    local $hide_tags_and_genres = 1;
+
     return unless
         (defined $inc &&
          $inc->has_rels &&
@@ -265,9 +268,10 @@ sub serialize_relationships {
 sub serialize_tags {
     my ($into, $entity, $inc, $stash, $toplevel) = @_;
 
+    return if $hide_tags_and_genres;
+
     return unless
-        ($toplevel &&
-         defined $inc &&
+        (defined $inc &&
          ($inc->tags || $inc->user_tags || $inc->genres || $inc->user_genres));
 
     my $opts = $stash->store($entity);
